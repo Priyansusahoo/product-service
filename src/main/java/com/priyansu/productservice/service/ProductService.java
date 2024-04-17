@@ -53,7 +53,23 @@ public class ProductService implements IProductService {
         return null;
     }
 
-//    public ResponseEntity<List<ProductResponse>> getAllProduct() {
-//        List<Product> products = productRepository.findAll();
-//    }
+    @Override
+    public ResponseEntity<List<ProductResponse>> getAllProduct() {
+        try {
+            List<Product> products = productRepository.findAll();
+            return ResponseEntity.status(HttpStatus.OK).body(products.stream().map(lauda -> mapToProductResponse(lauda)).toList());
+        } catch (Exception e){
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    private ProductResponse mapToProductResponse(Product product) {
+        return ProductResponse.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .build();
+    }
 }
