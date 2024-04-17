@@ -57,7 +57,7 @@ public class ProductService implements IProductService {
     public ResponseEntity<List<ProductResponse>> getAllProduct() {
         try {
             List<Product> products = productRepository.findAll();
-            return ResponseEntity.status(HttpStatus.OK).body(products.stream().map(lauda -> mapToProductResponse(lauda)).toList());
+            return ResponseEntity.status(HttpStatus.OK).body(products.stream().map(product -> mapToProductResponse(product)).toList());
         } catch (Exception e){
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
