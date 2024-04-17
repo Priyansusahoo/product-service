@@ -19,7 +19,10 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     private String id;
+    @NonNull
     private String name;
+    @NonNull
     private String description;
+    @NonNull
     private BigDecimal price;
 }
