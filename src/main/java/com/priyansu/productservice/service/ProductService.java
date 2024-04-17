@@ -1,6 +1,7 @@
 package com.priyansu.productservice.service;
 
 import com.priyansu.productservice.dto.ProductRequest;
+import com.priyansu.productservice.dto.ProductResponse;
 import com.priyansu.productservice.model.Product;
 import com.priyansu.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,10 +21,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductService {
+public class ProductService implements IProductService {
 
     private final ProductRepository productRepository;
 
+    @Override
     public ResponseEntity<Boolean> createProduct(ProductRequest productRequest) {
         try {
             if (productRequest.getName() == null || productRequest.getName().isEmpty() ||
@@ -49,4 +52,8 @@ public class ProductService {
         }
         return null;
     }
+
+//    public ResponseEntity<List<ProductResponse>> getAllProduct() {
+//        List<Product> products = productRepository.findAll();
+//    }
 }
