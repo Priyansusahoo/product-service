@@ -1,6 +1,7 @@
 package com.priyansu.productservice.controller;
 
 import com.priyansu.productservice.dto.ProductRequest;
+import com.priyansu.productservice.dto.ProductResponse;
 import com.priyansu.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author Priyansu Sahoo
@@ -27,4 +30,8 @@ public class ProductController {
     public ResponseEntity<Boolean> createProduct(@RequestBody ProductRequest productRequest){
             return productService.createProduct(productRequest);
     }
+
+//    public ResponseEntity<List<ProductResponse>> getAllProduct(){
+//        return productService.getAllProduct();
+//    }
 }
