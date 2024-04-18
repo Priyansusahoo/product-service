@@ -6,6 +6,7 @@ import com.priyansu.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,5 +42,11 @@ public class ProductController {
     @DeleteMapping("/deleteProductById")
     public ResponseEntity<Boolean> deleteProductById(@RequestParam String id){
         return productService.deleteProductById(id);
+    }
+
+    @Transactional
+    @PutMapping("/updateProductById")
+    public ResponseEntity<Boolean> updateProductById(@RequestParam String id, @RequestBody ProductRequest productRequest){
+        return productService.updateProductById(id, productRequest);
     }
 }

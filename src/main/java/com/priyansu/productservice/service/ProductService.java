@@ -98,4 +98,25 @@ public class ProductService implements IProductService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public ResponseEntity<Boolean> updateProductById(String id, ProductRequest productRequest) {
+        Optional<Product> product = productRepository.findById(id);
+
+        try {
+            if (product.isPresent()) {
+                product.get().setName(productRequest.getName());
+                product.get().setDescription(productRequest.getDescription());
+                product.get().setPrice(productRequest.getPrice());
+                productRepository.save(product.get());
+
+                return ResponseEntity.status(HttpStatus.OK).body(Boolean.TRUE);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Boolean.FALSE);
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 }
