@@ -16,4 +16,6 @@ public interface IProductService {
     ResponseEntity<List<ProductResponse>> getAllProduct();
 
     ResponseEntity<ProductResponse> getProductById(String id);
+
+    ResponseEntity<Boolean> deleteProductById(String id);
 }

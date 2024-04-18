@@ -96,5 +96,19 @@ public class ProductService implements IProductService {
                 ResponseEntity.status(HttpStatus.OK).body(mapToProductResponse(value))).orElseGet(() ->
                 ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProductResponse()));
 
+    @Override
+    public ResponseEntity<Boolean> deleteProductById(String id) {
+        try {
+            Optional<Product> product = productRepository.findById(id);
+
+            if (product.isPresent()) {
+                productRepository.deleteById(id);
+                return ResponseEntity.ok(Boolean.TRUE);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Boolean.FALSE);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

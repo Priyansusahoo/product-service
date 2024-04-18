@@ -37,4 +37,9 @@ public class ProductController {
     public ResponseEntity<ProductResponse> getProductById(@RequestParam String id){
         return productService.getProductById(id);
     }
+
+    @DeleteMapping("/deleteProductById")
+    public ResponseEntity<Boolean> deleteProductById(@RequestParam String id){
+        return productService.deleteProductById(id);
+    }
 }
