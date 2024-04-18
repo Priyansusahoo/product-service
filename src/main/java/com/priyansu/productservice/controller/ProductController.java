@@ -32,4 +32,9 @@ public class ProductController {
     public ResponseEntity<List<ProductResponse>> getAllProduct(){
         return productService.getAllProduct();
     }
+
+    @GetMapping("/getProductById")
+    public ResponseEntity<ProductResponse> getProductById(@RequestParam String id){
+        return productService.getProductById(id);
+    }
 }

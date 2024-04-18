@@ -72,4 +72,29 @@ public class ProductService implements IProductService {
                 .price(product.getPrice())
                 .build();
     }
+
+    @Override
+    public ResponseEntity<ProductResponse> getProductById(String id) {
+        Optional<Product> product = productRepository.findById(id);
+        /**
+         * Both Method 1 and Method 2 are same but different style
+         */
+        /**
+         * Method 1:
+         * Old School Way:
+         */
+        /*if (product.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(mapToProductResponse(product.get()));
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProductResponse());
+        }*/
+        /**
+         * Method 2
+         * Functional Style:
+         */
+        return product.map(value ->
+                ResponseEntity.status(HttpStatus.OK).body(mapToProductResponse(value))).orElseGet(() ->
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProductResponse()));
+
+    }
 }

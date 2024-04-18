@@ -14,4 +14,6 @@ import java.util.List;
 public interface IProductService {
     ResponseEntity<Boolean> createProduct(ProductRequest productRequest);
     ResponseEntity<List<ProductResponse>> getAllProduct();
+
+    ResponseEntity<ProductResponse> getProductById(String id);
 }
