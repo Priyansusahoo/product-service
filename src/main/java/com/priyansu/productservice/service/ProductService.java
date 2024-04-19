@@ -75,11 +75,15 @@ public class ProductService implements IProductService {
 
     @Override
     public ResponseEntity<ProductResponse> getProductById(String id) {
-        Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(mapToProductResponse(product.get()));
-        } else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProductResponse());
+        try {
+            Optional<Product> product = productRepository.findById(id);
+            if (product.isPresent()) {
+                return ResponseEntity.status(HttpStatus.OK).body(mapToProductResponse(product.get()));
+            } else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProductResponse());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
