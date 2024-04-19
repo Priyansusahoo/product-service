@@ -104,6 +104,7 @@ public class ProductService implements IProductService {
         Optional<Product> product = productRepository.findById(id);
 
         try {
+            // check if any entity parameter is null or empty
             if (product.isPresent()) {
                 product.get().setName(productRequest.getName());
                 product.get().setDescription(productRequest.getDescription());
