@@ -17,6 +17,7 @@ import java.util.List;
  * @Project product-service
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/product")
 @RequiredArgsConstructor
 @Slf4j
